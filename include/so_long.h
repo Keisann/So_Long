@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
+/*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:53:48 by flren             #+#    #+#             */
-/*   Updated: 2025/04/15 17:56:33 by flren            ###   ########.fr       */
+/*   Updated: 2025/04/22 00:59:21 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 # include "stdlib.h"
 # include "limits.h"
 # include "stdio.h"
+
+void	ft_putstr_fd(char *s, int fd);
 
 #endif

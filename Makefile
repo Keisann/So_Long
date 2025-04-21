@@ -28,6 +28,7 @@ INCLUDES = -Iinclude -Iget_next_line
 
 SRCS = \
 	src/so_long.c \
+	src/ft_putstr_fd.c \
 	get_next_line/get_next_line.c \
 	get_next_line/get_next_line_utils.c
 
