@@ -1,5 +1,5 @@
 # ============================ #
-#         COMPILATION         #
+#         COMPILATION          #
 # ============================ #
 
 CC = cc
@@ -7,7 +7,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 MAKEFLAGS += --no-print-directory
 
 # ============================ #
-#           COULEURS          #
+#           COULEURS           #
 # ============================ #
 
 RESET = "\033[0m"
@@ -16,19 +16,21 @@ YELLOW = "\033[0;33m"
 BLUE = "\033[0;34m"
 
 # ============================ #
-#        INCLUDE & NORM       #
+#        INCLUDE & NORM        #
 # ============================ #
 
 NAME = so_long
 INCLUDES = -Iinclude -Iget_next_line
 
 # ============================ #
-#           FICHIERS          #
+#           FICHIERS           #
 # ============================ #
 
 SRCS = \
 	src/so_long.c \
 	src/ft_putstr_fd.c \
+	src/error/ft_check_map.c \
+	src/error/ft_error.c \
 	get_next_line_fd/get_next_line.c \
 	get_next_line_fd/get_next_line_utils.c
 
@@ -37,7 +39,7 @@ OBJS = $(SRCS:.c=.o)
 OBJS := $(patsubst %, $(OBJS_DIR)/%, $(OBJS))
 
 # ============================ #
-#           COMMANDES         #
+#           COMMANDES          #
 # ============================ #
 
 all: $(NAME)
