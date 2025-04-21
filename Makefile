@@ -29,8 +29,8 @@ INCLUDES = -Iinclude -Iget_next_line
 SRCS = \
 	src/so_long.c \
 	src/ft_putstr_fd.c \
-	get_next_line/get_next_line.c \
-	get_next_line/get_next_line_utils.c
+	get_next_line_fd/get_next_line.c \
+	get_next_line_fd/get_next_line_utils.c
 
 OBJS_DIR = poubelle
 OBJS = $(SRCS:.c=.o)
