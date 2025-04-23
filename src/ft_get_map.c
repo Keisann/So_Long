@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_push_map.c                                      :+:      :+:    :+:   */
+/*   ft_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 20:46:14 by keisan            #+#    #+#             */
-/*   Updated: 2025/04/23 18:34:12 by keisan           ###   ########.fr       */
+/*   Created: 2025/04/23 16:44:17 by keisan            #+#    #+#             */
+/*   Updated: 2025/04/23 18:38:56 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_game	ft_push_map(t_game *game, char *file)
+void	ft_get_map_rows(t_game *game, char	*file)
 {
-	int	len;
+	int	fd;
+	int	i;
+	char	*line;
 
-	len = ft_strlen(file);
-	if (len < 4 || ft_strncmp(file + len - 4, ".ber", 4) != 0)
+	i = 0;
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
 	{
-		ft_putstr_fd("Invalid file extension\n", STDERR_FILENO);
+		ft_putstr_fd("Error to open file\n", STDERR_FILENO);
+		perror(file);
 		exit(EXIT_FAILURE);
 	}
-	ft_init_game(game); //initialiser les valeurs dans game
-	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map
+	line = get_next_line(fd);
+	while (line)
+	{
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(file);
+	game->rows = i;
+}
+
+void	ft_get_map(t_game game, char *file)
+{
+	
 }
