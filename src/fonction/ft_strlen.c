@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/04/23 15:09:21 by keisan           ###   ########.fr       */
+/*   Created: 2025/04/23 15:18:30 by keisan            #+#    #+#             */
+/*   Updated: 2025/04/23 15:19:12 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int	ac, char	**av)
+int	ft_strlen(const char *str)
 {
-	t_game	game;
+	unsigned int	i;
 
-	if (ac != 2)
-		return (ft_putstr_fd("Invalid number of arguments\n", STDERR_FILENO), EXIT_FAILURE);
-	game = ft_push_map(&game, av[1]);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

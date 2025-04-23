@@ -28,7 +28,11 @@ INCLUDES = -Iinclude -Iget_next_line
 
 SRCS = \
 	src/so_long.c \
-	src/ft_putstr_fd.c \
+	src/ft_init_game.c \
+	src/ft_push_map.c \
+	src/fonction/ft_putstr_fd.c \
+	src/fonction/ft_strlen.c \
+	src/fonction/ft_strncmp.c \
 	src/error/ft_check_map.c \
 	src/error/ft_error.c \
 	get_next_line_fd/get_next_line.c \

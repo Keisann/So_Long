@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_push_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/04/23 15:09:21 by keisan           ###   ########.fr       */
+/*   Created: 2025/04/22 20:46:14 by keisan            #+#    #+#             */
+/*   Updated: 2025/04/23 15:27:29 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int	ac, char	**av)
+t_game	ft_push_map(t_game *game, char *file)
 {
-	t_game	game;
+	int	len;
 
-	if (ac != 2)
-		return (ft_putstr_fd("Invalid number of arguments\n", STDERR_FILENO), EXIT_FAILURE);
-	game = ft_push_map(&game, av[1]);
+	len = ft_strlen(file);
+	if (len < 4 || ft_strncmp(file + len - 4, ".ber", 4) != 0)
+	{
+		ft_putstr_fd("Invalid file extension\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
 }

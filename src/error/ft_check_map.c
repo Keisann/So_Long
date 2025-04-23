@@ -6,13 +6,13 @@
 /*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 00:51:21 by keisan            #+#    #+#             */
-/*   Updated: 2025/04/22 01:00:17 by keisan           ###   ########.fr       */
+/*   Updated: 2025/04/22 21:37:29 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int ft_check_map(char   **map)
+int	ft_check_map(char	**map)
 {
-    
+	
 }

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   ft_init_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/04/23 15:09:21 by keisan           ###   ########.fr       */
+/*   Created: 2025/04/22 21:19:36 by keisan            #+#    #+#             */
+/*   Updated: 2025/04/22 21:22:25 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	main(int	ac, char	**av)
+void	ft_init_game(t_game *game)
 {
-	t_game	game;
-
-	if (ac != 2)
-		return (ft_putstr_fd("Invalid number of arguments\n", STDERR_FILENO), EXIT_FAILURE);
-	game = ft_push_map(&game, av[1]);
+	game->map = 0;
+	game->rows = 0;
+	game->cols = 0;
+	game->player_x = 0;
+	game->player_y = 0;
+	game->total_C = 0;
+	game->count_C = 0;
+	game->moves = 0;
+	game->exits = 0;
 }
