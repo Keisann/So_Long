@@ -6,7 +6,7 @@
 /*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 20:46:14 by keisan            #+#    #+#             */
-/*   Updated: 2025/04/23 18:34:12 by keisan           ###   ########.fr       */
+/*   Updated: 2025/04/28 13:39:02 by keisan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ t_game	ft_push_map(t_game *game, char *file)
 		exit(EXIT_FAILURE);
 	}
 	ft_init_game(game); //initialiser les valeurs dans game
-	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map
+	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map dans game->rows
+	ft_get_map(game, file); //
 }
