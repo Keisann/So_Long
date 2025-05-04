@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_push_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 20:46:14 by keisan            #+#    #+#             */
-/*   Updated: 2025/04/28 13:39:02 by keisan           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:50:01 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_game	ft_push_map(t_game *game, char *file)
 	}
 	ft_init_game(game); //initialiser les valeurs dans game
 	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map dans game->rows
-	ft_get_map(game, file); //
+	ft_get_map(game, file); //stock ligne par ligne dans game->map
+	return (*game);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 16:44:17 by keisan            #+#    #+#             */
-/*   Updated: 2025/04/28 16:15:26 by keisan           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:50:21 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_get_map_rows(t_game *game, char	*file)
 		free(line);
 		line = get_next_line(fd);
 	}
-	close(file);
+	close(fd);
 	game->rows = i;
 }
 
@@ -49,5 +49,18 @@ void	ft_get_map(t_game *game, char *file)
 		ft_putstr_fd("Error Malloc Map\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+	{
+		ft_putstr_fd("Error to open file\n", STDERR_FILENO);
+		perror(file);
+		exit(EXIT_FAILURE);
+	}
+	while (1)
+	{
+		game->map[i] = get_next_line(fd);
+		if (!game->map[i++])
+			break ;
+	}
+	close(fd);
 }

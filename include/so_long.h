@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keisan <keisan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:53:48 by flren             #+#    #+#             */
-/*   Updated: 2025/04/23 18:20:45 by keisan           ###   ########.fr       */
+/*   Updated: 2025/05/04 16:48:45 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ void	ft_error(char **map, char *msg);
 int	ft_strlen(const char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*get_next_line(int fd);
+void	ft_get_map(t_game *game, char *file);
 
 #endif
