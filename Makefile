@@ -34,6 +34,7 @@ SRCS = \
 	src/fonction/ft_putstr_fd.c \
 	src/fonction/ft_strncmp.c \
 	src/error/ft_error.c \
+	src/error/ft_check_map.c \
 	get_next_line_fd/get_next_line.c \
 	get_next_line_fd/get_next_line_utils.c
 
@@ -60,7 +61,7 @@ clean:
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
-	@echo $(YELLOW)→ Suppression des fichiers objets et de l'exécutable 🗑️$(RESET)
+	@echo $(YELLOW)→ Suppression des fichiers objets 🗑️$(RESET)
 	@rm -f $(NAME)
 
 re: fclean all

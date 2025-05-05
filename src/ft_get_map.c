@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/23 16:44:17 by keisan            #+#    #+#             */
-/*   Updated: 2025/05/04 16:50:21 by flren            ###   ########.fr       */
+/*   Created: 2025/05/05 15:16:06 by flren             #+#    #+#             */
+/*   Updated: 2025/05/05 15:56:16 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,18 @@ void	ft_get_map_rows(t_game *game, char	*file)
 	close(fd);
 	game->rows = i;
 }
+void	ft_rm_newline(t_game *game)
+{
+	int	i;
 
+	i = 0;
+	while (game->map[i])
+	{
+		if (game->map[i][ft_strlen(game->map[i]) - 1] == '\n')
+			game->map[i][ft_strlen(game->map[i]) - 1] = '\0';
+		i++;
+	}
+}
 void	ft_get_map(t_game *game, char *file)
 {
 	int	fd;
@@ -46,7 +57,7 @@ void	ft_get_map(t_game *game, char *file)
 	game->map = malloc(sizeof(char *) * (game->rows + 1));
 	if (!game->map)
 	{
-		ft_putstr_fd("Error Malloc Map\n", STDERR_FILENO);
+		ft_putstr_fd("Error malloc map\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	fd = open(file, O_RDONLY);
@@ -62,5 +73,6 @@ void	ft_get_map(t_game *game, char *file)
 		if (!game->map[i++])
 			break ;
 	}
+	ft_rm_newline(game);
 	close(fd);
 }

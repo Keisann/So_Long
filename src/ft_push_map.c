@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 20:46:14 by keisan            #+#    #+#             */
-/*   Updated: 2025/05/04 16:50:01 by flren            ###   ########.fr       */
+/*   Created: 2025/05/05 15:18:03 by flren             #+#    #+#             */
+/*   Updated: 2025/05/05 16:29:55 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_game	ft_push_map(t_game *game, char *file)
 	ft_init_game(game); //initialiser les valeurs dans game
 	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map dans game->rows
 	ft_get_map(game, file); //stock ligne par ligne dans game->map
+	ft_check_map(game); //check si la map est valide
 	return (*game);
 }

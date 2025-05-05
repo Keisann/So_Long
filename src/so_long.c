@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/05/04 17:34:40 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/05 15:56:35 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void	print_map(t_game *game)
 
 	while (game->map[i])
 	{
-		ft_putstr_fd(game->map[i], 1);  // 1 = STDOUT
+		ft_putstr_fd(game->map[i], STDOUT_FILENO);
+		write(1, "\n", 1);
 		i++;
 	}
 }
