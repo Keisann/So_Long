@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:53:48 by flren             #+#    #+#             */
-/*   Updated: 2025/05/05 16:29:10 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/12 18:14:56 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "limits.h"
 # include "fcntl.h"
 # include "stdio.h"
+# include "mlx.h"
 
 typedef struct s_game {
 
@@ -31,12 +32,15 @@ typedef struct s_game {
 	int		player_y;
 
 	// Objectifs
-	int		total_C;   		// Nombre total de C dans la map
-	int		count_C;      	// Combien a été pris
-	int		exits;          // Nombre de sorties (doit être == 1)
+	int		C;      		// Combien a été pris
 	int		moves;          // Nombre de déplacements du joueur
 
-	}	t_game;
+	// Counts
+	int	count_c;			//Nombre de collectible
+	int count_p;			//P != 1 Erreur
+	int count_e;			//E != 1 Erreur
+
+}	t_game;
 
 void	ft_putstr_fd(char *s, int fd);
 void	ft_init_game(t_game *game);
@@ -48,5 +52,9 @@ int	ft_strlen(const char *str);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*get_next_line(int fd);
 void	ft_get_map(t_game *game, char *file);
+int	ft_map_is_good(t_game *game);
+int	ft_is_rectangle(t_game *game);
+int	ft_c_is_good(char c);
+int	ft_map_closed_1(t_game *game);
 
 #endif

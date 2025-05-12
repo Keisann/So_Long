@@ -6,10 +6,11 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:16:06 by flren             #+#    #+#             */
-/*   Updated: 2025/05/05 15:56:16 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/12 18:43:52 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include"mlx.h"
 #include "so_long.h"
 
 void	ft_get_map_rows(t_game *game, char	*file)
@@ -22,7 +23,7 @@ void	ft_get_map_rows(t_game *game, char	*file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error to open file\n", STDERR_FILENO);
+		ft_putstr_fd("Error\nFailed to open file\n", STDERR_FILENO);
 		perror(file);
 		exit(EXIT_FAILURE);
 	}
@@ -57,17 +58,17 @@ void	ft_get_map(t_game *game, char *file)
 	game->map = malloc(sizeof(char *) * (game->rows + 1));
 	if (!game->map)
 	{
-		ft_putstr_fd("Error malloc map\n", STDERR_FILENO);
+		ft_putstr_fd("Error\nMalloc map failed\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error to open file\n", STDERR_FILENO);
+		ft_error(game->map, "Error\nFailed to open file\n");
 		perror(file);
 		exit(EXIT_FAILURE);
 	}
-	while (1)
+	while (game->map[i])
 	{
 		game->map[i] = get_next_line(fd);
 		if (!game->map[i++])

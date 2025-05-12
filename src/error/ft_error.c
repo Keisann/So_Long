@@ -6,10 +6,11 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 15:08:24 by keisan            #+#    #+#             */
-/*   Updated: 2025/05/05 15:19:28 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/12 14:05:08 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include"mlx.h"
 #include "so_long.h"
 
 static void	ft_free_map(char **map)

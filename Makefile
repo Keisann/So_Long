@@ -16,11 +16,18 @@ YELLOW = "\033[0;33m"
 BLUE = "\033[0;34m"
 
 # ============================ #
-#        INCLUDE & NORM        #
+#            Minilibx          #
+# ============================ #
+
+MINILIBX_DIR = minilibx-linux
+MINILIBX = $(MINILIBX_DIR)/mlx.a
+
+# ============================ #
+#            INCLUDE           #
 # ============================ #
 
 NAME = so_long
-INCLUDES = -Iinclude -Iget_next_line
+INCLUDES = -Iinclude -Iget_next_line -I$(MINILIBX_DIR)
 
 # ============================ #
 #           FICHIERS           #
@@ -35,6 +42,7 @@ SRCS = \
 	src/fonction/ft_strncmp.c \
 	src/error/ft_error.c \
 	src/error/ft_check_map.c \
+	src/error/ft_check_map_utils.c \
 	get_next_line_fd/get_next_line.c \
 	get_next_line_fd/get_next_line_utils.c
 
@@ -46,12 +54,16 @@ OBJS := $(patsubst %, $(OBJS_DIR)/%, $(OBJS))
 #           COMMANDES          #
 # ============================ #
 
-all: $(NAME)
+all: $(MINILIBX) $(NAME)
 	@echo $(GREEN)✔ Compilation terminée avec succès !$(RESET)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+$(MINILIBX):
+	@echo $(BLUE)→ Compilation de Mililibx...$(RESET)
+	@make -C $(MINILIBX_DIR)
 
 $(NAME): $(OBJS)
 	@echo $(BLUE)→ Compilation de So Long...$(RESET)

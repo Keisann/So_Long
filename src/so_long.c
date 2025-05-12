@@ -6,11 +6,12 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/05/05 15:56:35 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/12 17:23:38 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "mlx.h"
 
 void	print_map(t_game *game)
 {
@@ -29,7 +30,7 @@ int	main(int	ac, char	**av)
 	t_game	game;
 
 	if (ac != 2)
-		return (ft_putstr_fd("Invalid number of arguments\n", STDERR_FILENO), EXIT_FAILURE);
+		return (ft_putstr_fd("Error\nInvalid number of arguments\n", STDERR_FILENO), EXIT_FAILURE);
 	game = ft_push_map(&game, av[1]); //parsing + push dans game->map
 	print_map(&game);
 }
