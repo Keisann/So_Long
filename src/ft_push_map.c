@@ -6,11 +6,10 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:18:03 by flren             #+#    #+#             */
-/*   Updated: 2025/05/12 17:23:53 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/13 18:05:23 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx.h"
 #include "so_long.h"
 
 t_game	ft_push_map(t_game *game, char *file)
@@ -18,10 +17,10 @@ t_game	ft_push_map(t_game *game, char *file)
 	int	len;
 
 	len = ft_strlen(file);
-	if (len < 4 || ft_strncmp(file + len - 4, ".ber", 4) != 0)
+	if (len < 4 || ft_strncmp(file + len - 4, ".ber", 4) == 0)
 	{
 		ft_putstr_fd("Error\nInvalid file extension\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
+		exit(FAIL);
 	}
 	ft_init_game(game); //initialiser les valeurs dans game
 	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map dans game->rows

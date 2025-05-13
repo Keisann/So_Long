@@ -6,11 +6,10 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:36:15 by flren             #+#    #+#             */
-/*   Updated: 2025/05/12 18:14:19 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/13 18:05:44 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx.h"
 #include "so_long.h"
 
 int	ft_map_is_good(t_game *game)
@@ -25,12 +24,12 @@ int	ft_map_is_good(t_game *game)
 		while (game->map[x][y])
 		{
 			if (ft_c_is_good(game->map[x][y]) == 1)
-				return (EXIT_FAILURE);
+				return (FAIL);
 			y++;
 		}
 		x++;
 	}
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 int	ft_is_rectangle(t_game *game)
 {
@@ -42,10 +41,10 @@ int	ft_is_rectangle(t_game *game)
 	{
 		cols = ft_strlen(game->map[i]);
 		if (cols != game->cols)
-			return (EXIT_FAILURE);
+			return (FAIL);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 int	ft_map_closed_1(t_game *game)
 {
@@ -61,17 +60,16 @@ int	ft_map_closed_1(t_game *game)
 			if (x == 0 || x == game->rows - 1)
 			{
 				if (game->map[x][y] != '1')
-					return (EXIT_FAILURE);
-				y++;
+					return (FAIL);
 			}
 			else if (y == 0 || y == game->cols - 1)
 			{
 				if (game->map[x][y] != '1')
-					return (EXIT_FAILURE);
-				y++;
+					return (FAIL);
 			}
+			y++;
 		}
 		x++;
 	}
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }

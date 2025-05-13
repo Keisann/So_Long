@@ -6,11 +6,10 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 00:58:46 by keisan            #+#    #+#             */
-/*   Updated: 2025/05/12 14:05:05 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/13 18:05:36 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx.h"
 #include "so_long.h"
 
 void	ft_putstr_fd(char *s, int fd)

@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:53:48 by flren             #+#    #+#             */
-/*   Updated: 2025/05/12 18:14:56 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/13 18:21:25 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include "limits.h"
 # include "fcntl.h"
 # include "stdio.h"
-# include "mlx.h"
+
+# define SUCCESS 1
+# define FAIL 0
 
 typedef struct s_game {
 

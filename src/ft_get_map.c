@@ -6,11 +6,10 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:16:06 by flren             #+#    #+#             */
-/*   Updated: 2025/05/12 18:43:52 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/13 18:05:30 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"mlx.h"
 #include "so_long.h"
 
 void	ft_get_map_rows(t_game *game, char	*file)
@@ -25,7 +24,7 @@ void	ft_get_map_rows(t_game *game, char	*file)
 	{
 		ft_putstr_fd("Error\nFailed to open file\n", STDERR_FILENO);
 		perror(file);
-		exit(EXIT_FAILURE);
+		exit(FAIL);
 	}
 	line = get_next_line(fd);
 	while (line)
@@ -59,16 +58,16 @@ void	ft_get_map(t_game *game, char *file)
 	if (!game->map)
 	{
 		ft_putstr_fd("Error\nMalloc map failed\n", STDERR_FILENO);
-		exit(EXIT_FAILURE);
+		exit(FAIL);
 	}
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_error(game->map, "Error\nFailed to open file\n");
 		perror(file);
-		exit(EXIT_FAILURE);
+		exit(FAIL);
 	}
-	while (game->map[i])
+	while (1)
 	{
 		game->map[i] = get_next_line(fd);
 		if (!game->map[i++])
