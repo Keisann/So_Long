@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:17:24 by flren             #+#    #+#             */
-/*   Updated: 2025/05/13 18:05:27 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/14 13:47:49 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_init_game(t_game *game)
 	game->moves = 0;
 	game->C = 0;
 	game->count_c = 0;
+	game->count_cpy_c = 0;
 	game->count_e = 0;
+	game->count_cpy_e = 0;
 	game->count_p = 0;
 }

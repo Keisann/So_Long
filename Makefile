@@ -4,6 +4,7 @@
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
+LDFLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm
 MAKEFLAGS += --no-print-directory
 
 # ============================ #
@@ -20,7 +21,7 @@ BLUE = "\033[0;34m"
 # ============================ #
 
 MINILIBX_DIR = minilibx-linux
-MINILIBX = $(MINILIBX_DIR)/mlx.a
+MINILIBX = $(MINILIBX_DIR)/libmlx.a
 
 # ============================ #
 #            INCLUDE           #
@@ -46,7 +47,7 @@ SRCS = \
 	get_next_line_fd/get_next_line.c \
 	get_next_line_fd/get_next_line_utils.c
 
-OBJS_DIR = poubelle
+OBJS_DIR = obj
 OBJS = $(SRCS:.c=.o)
 OBJS := $(patsubst %, $(OBJS_DIR)/%, $(OBJS))
 
@@ -63,11 +64,11 @@ $(OBJS_DIR)/%.o: %.c
 
 $(MINILIBX):
 	@echo $(BLUE)→ Compilation de Mililibx...$(RESET)
-	@make -C $(MINILIBX_DIR)
+	@$(MAKE) -C $(MINILIBX_DIR)
 
 $(NAME): $(OBJS)
 	@echo $(BLUE)→ Compilation de So Long...$(RESET)
-	@$(CC) $(CFLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS) > /dev/null
 
 clean:
 	@rm -rf $(OBJS_DIR)

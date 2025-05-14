@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/05/13 18:05:21 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/14 17:12:52 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ int	main(int	ac, char	**av)
 	if (ac != 2)
 		return (ft_putstr_fd("Error\nInvalid number of arguments\n", STDERR_FILENO), FAIL);
 	game = ft_push_map(&game, av[1]); //parsing + push dans game->map
-	print_map(&game);
 }
 
