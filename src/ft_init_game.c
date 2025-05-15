@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:17:24 by flren             #+#    #+#             */
-/*   Updated: 2025/05/14 13:47:49 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/15 14:48:48 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_init_game(t_game *game)
 	game->map = 0;
 	game->rows = 0;
 	game->cols = 0;
-	game->player_x = 0;
-	game->player_y = 0;
+	game->player_c = 0;
+	game->player_r = 0;
 	game->moves = 0;
 	game->C = 0;
 	game->count_c = 0;
