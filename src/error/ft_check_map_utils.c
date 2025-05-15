@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:36:15 by flren             #+#    #+#             */
-/*   Updated: 2025/05/14 17:16:53 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/15 18:14:46 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int	ft_map_closed_1(t_game *game)
 }
 void	ft_flood_fill(int r, int c, t_game *game, char **map)
 {
-	//printf("X = %d | Y = %d\n", x, y);
-	//printf("map = %c\n", map[y][x]);
 	if (r < 0 || r >= game->rows || c < 0 || c >= game->cols)
 		return ;
 	if (map[r][c] == '1' || map[r][c] == 'V')

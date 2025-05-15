@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:51:51 by flren             #+#    #+#             */
-/*   Updated: 2025/05/14 17:20:24 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/15 17:34:49 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@ void	ft_check_map(t_game *game)
 
 	cpy_map = game->map;
 	i = 0;
+	if (game->map[0] == 0)
+		ft_error(game->map, "Error\nNo Map\n");
 	game->cols = ft_strlen(game->map[0]);
 	if ((game->rows < 3 || game->cols < 5) && ft_strlen(game->map[game->rows - 1]) )
 		ft_error(game->map, "Error\nMap is too small\n");

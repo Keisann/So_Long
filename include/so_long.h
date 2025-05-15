@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:53:48 by flren             #+#    #+#             */
-/*   Updated: 2025/05/14 17:06:04 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/15 17:59:01 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	ft_get_map_rows(t_game *game, char	*file);
 t_game	ft_push_map(t_game *game, char *file);
 void	ft_error(char **map, char *msg);
 void	ft_check_map(t_game *game);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*get_next_line(int fd);
 void	ft_get_map(t_game *game, char *file);
 int	ft_map_is_good(t_game *game);

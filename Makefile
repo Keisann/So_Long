@@ -40,7 +40,6 @@ SRCS = \
 	src/ft_push_map.c \
 	src/ft_get_map.c \
 	src/fonction/ft_putstr_fd.c \
-	src/fonction/ft_strncmp.c \
 	src/error/ft_error.c \
 	src/error/ft_check_map.c \
 	src/error/ft_check_map_utils.c \
