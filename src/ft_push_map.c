@@ -6,13 +6,13 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 15:18:03 by flren             #+#    #+#             */
-/*   Updated: 2025/05/15 17:58:24 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/16 15:33:06 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-t_game	ft_push_map(t_game *game, char *file)
+static	void	ft_chech_file(char *file)
 {
 	int	len;
 	int	i;
@@ -38,9 +38,13 @@ t_game	ft_push_map(t_game *game, char *file)
 		}
 		i++;
 	}
+}
+
+void	ft_push_map(t_game *game, char *file)
+{
+	ft_chech_file(file); //check si le file est bien en .ber
 	ft_init_game(game); //initialiser les valeurs dans game
 	ft_get_map_rows(game, file); //initialiser le nombre de ligne de la map dans game->rows
 	ft_get_map(game, file); //stock ligne par ligne dans game->map
 	ft_check_map(game); //check si la map est valide
-	return (*game);
 }

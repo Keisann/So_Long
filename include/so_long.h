@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 17:53:48 by flren             #+#    #+#             */
-/*   Updated: 2025/05/15 17:59:01 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/16 16:30:41 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include "limits.h"
 # include "fcntl.h"
 # include "stdio.h"
+# include "mlx.h"
 
+# define TILE_SIZE 64
 # define SUCCESS 1
 # define FAIL 0
 
@@ -33,6 +35,11 @@ typedef struct s_game {
 	int		player_c;
 	int		player_r;
 
+	// Position Exit
+
+	int		exit_c;
+	int		exit_r;
+
 	// Objectifs
 	int		C;      		// Combien a été pris
 	int		moves;          // Nombre de déplacements du joueur
@@ -44,12 +51,23 @@ typedef struct s_game {
 	int count_cpy_e;
 	int count_p;			//P != 1 Erreur
 
+	// Minilib
+	void	*mlx_ptr;
+	void	*win_ptr;
+
+	// image
+	void	*img_wall;
+	void	*img_floor;
+	void	*img_player;
+	void	*img_exit;
+	void	*img_coins;
+
 }	t_game;
 
 void	ft_putstr_fd(char *s, int fd);
 void	ft_init_game(t_game *game);
 void	ft_get_map_rows(t_game *game, char	*file);
-t_game	ft_push_map(t_game *game, char *file);
+void	ft_push_map(t_game *game, char *file);
 void	ft_error(char **map, char *msg);
 void	ft_check_map(t_game *game);
 char	*get_next_line(int fd);
@@ -65,6 +83,8 @@ void	ft_init_count(t_game *game);
 void	ft_rm_newline(t_game *game);
 int ft_map_finish(t_game *game, char **map);
 size_t	ft_strlen(const char *s);
+void	ft_flood_fill2(int r, int c, t_game *game, char **map);
 
+void	print_map(char **map);
 
 #endif

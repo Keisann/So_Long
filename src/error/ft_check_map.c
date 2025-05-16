@@ -6,7 +6,7 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:51:51 by flren             #+#    #+#             */
-/*   Updated: 2025/05/15 17:34:49 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/16 16:30:06 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,11 @@ void	ft_init_count(t_game *game)
 			if (game->map[r][c] == 'P')
 				game->count_p += 1;
 			else if (game->map[r][c] == 'E')
+			{
 				game->count_e += 1;
+				game->exit_c = c;
+				game->exit_r = r;
+			}
 			else if (game->map[r][c] == 'C')
 				game->count_c += 1;
 			c++;
@@ -66,11 +70,18 @@ int	ft_c_is_good(char c)
 int ft_map_finish(t_game *game, char **map)
 {
 	int valid;
-	
+
 	valid = 0;
 	ft_flood_fill(game->player_r, game->player_c, game, map);
+	if (game->count_cpy_e == 1)
+		valid = 1;
+	map[game->exit_r][game->exit_c] = '1';
+	print_map(map);
+	ft_flood_fill2(game->player_r, game->player_c, game, map);
 	if (game->count_cpy_c == 0 && game->count_cpy_e == 1)
 		valid = 1;
+	else
+		valid = 0;
 	return (valid);
 }
 
