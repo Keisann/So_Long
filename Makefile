@@ -4,7 +4,7 @@
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-LDFLAGS = -L$(MINILIBX_DIR) -lmlx -lXext -lX11 -lm
+LDFLAGS = -L$(MINILIBX_DIR) -lmlx -Imlx -lXext -lX11 -lm -L$(LIBFT_DIR) -lft
 MAKEFLAGS += --no-print-directory
 
 # ============================ #
@@ -23,12 +23,15 @@ BLUE = "\033[0;34m"
 MINILIBX_DIR = minilibx-linux
 MINILIBX = $(MINILIBX_DIR)/libmlx.a
 
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
 # ============================ #
 #            INCLUDE           #
 # ============================ #
 
 NAME = so_long
-INCLUDES = -Iinclude -Iget_next_line -I$(MINILIBX_DIR)
+INCLUDES = -Iinclude -I$(LIBFT_DIR) -I$(MINILIBX_DIR)
 
 # ============================ #
 #           FICHIERS           #
@@ -36,15 +39,16 @@ INCLUDES = -Iinclude -Iget_next_line -I$(MINILIBX_DIR)
 
 SRCS = \
 	src/so_long.c \
-	src/ft_init_game.c \
 	src/ft_push_map.c \
 	src/ft_get_map.c \
+	src/ft_play_game.c \
+	src/ft_init_img.c \
+	src/ft_key_move.c \
 	src/fonction/ft_putstr_fd.c \
 	src/error/ft_error.c \
+	src/error/ft_close_window.c \
 	src/error/ft_check_map.c \
-	src/error/ft_check_map_utils.c \
-	get_next_line_fd/get_next_line.c \
-	get_next_line_fd/get_next_line_utils.c
+	src/error/ft_check_map_utils.c
 
 OBJS_DIR = obj
 OBJS = $(SRCS:.c=.o)
@@ -54,16 +58,21 @@ OBJS := $(patsubst %, $(OBJS_DIR)/%, $(OBJS))
 #           COMMANDES          #
 # ============================ #
 
-all: $(MINILIBX) $(NAME)
+all: $(LIBFT) $(MINILIBX) $(NAME)
 	@echo $(GREEN)✔ Compilation terminée avec succès !$(RESET)
 
 $(OBJS_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
+$(LIBFT):
+	@echo $(BLUE)→ Compilation de Libft...$(RESET)
+	@$(MAKE) -C $(LIBFT_DIR)
+
 $(MINILIBX):
 	@echo $(BLUE)→ Compilation de Mililibx...$(RESET)
 	@$(MAKE) -C $(MINILIBX_DIR)
+
 
 $(NAME): $(OBJS)
 	@echo $(BLUE)→ Compilation de So Long...$(RESET)
@@ -71,6 +80,9 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -rf $(OBJS_DIR)
+	@$(MAKE) clean -C $(MINILIBX_DIR)
+	@$(MAKE) clean -C $(LIBFT_DIR)
+	
 
 fclean: clean
 	@echo $(YELLOW)→ Suppression des fichiers objets 🗑️$(RESET)

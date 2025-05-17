@@ -6,78 +6,87 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 16:51:51 by flren             #+#    #+#             */
-/*   Updated: 2025/05/16 16:30:06 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/17 06:17:10 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_player(t_game *game)
+int	ft_map_is_good(t_game *game)
 {
-	int	c;
 	int	r;
-	
-	r = 0;
-	while (game->map[r])
-	{
-		c = 0;
-		while (game->map[r][c])
-		{
-			if (game->map[r][c] == 'P')
-			{
-				game->player_r = r;
-				game->player_c = c;
-			}
-			c++;
-		}
-		r++;
-	}
-}
+	int	c;
 
-void	ft_init_count(t_game *game)
-{
-	int	c;
-	int	r;
-	
 	r = 0;
 	while (game->map[r])
 	{
 		c = 0;
 		while (game->map[r][c])
 		{
-			if (game->map[r][c] == 'P')
-				game->count_p += 1;
-			else if (game->map[r][c] == 'E')
-			{
-				game->count_e += 1;
-				game->exit_c = c;
-				game->exit_r = r;
-			}
-			else if (game->map[r][c] == 'C')
-				game->count_c += 1;
+			if (ft_c_is_good(game->map[r][c]) == FAIL)
+				return (FAIL);
 			c++;
 		}
 		r++;
 	}
-	game->count_cpy_c = game->count_c;
-}
-int	ft_c_is_good(char c)
-{
-	if (c != 'C' || c != 'P' || c != 'E' || c != '1' || c != '0')
-		return (FAIL);
 	return (SUCCESS);
 }
-int ft_map_finish(t_game *game, char **map)
+
+int	ft_map_closed_1(t_game *game)
 {
-	int valid;
+	int	r;
+	int	c;
+
+	r = 0;
+	while (game->map[r])
+	{
+		c = 0;
+		while (game->map[r][c])
+		{
+			if (r == 0 || r == game->rows - 1)
+			{
+				if (game->map[r][c] != '1')
+					return (FAIL);
+			}
+			else if (c == 0 || c == game->cols - 1)
+			{
+				if (game->map[r][c] != '1')
+					return (FAIL);
+			}
+			c++;
+		}
+		r++;
+	}
+	return (SUCCESS);
+}
+
+void	ft_flood_fill(int r, int c, t_game *game, char **map)
+{
+	if (r < 0 || r >= game->rows || c < 0 || c >= game->cols)
+		return ;
+	if (map[r][c] == '1' || map[r][c] == 'V')
+		return ;
+	if (map[r][c] == 'C')
+		game->count_cpy_c--;
+	if (map[r][c] == 'E')
+	{
+		game->count_cpy_e++;
+		map[r][c] = 'V';
+		return ;
+	}
+	map[r][c] = 'V';
+	ft_flood_fill(r + 1, c, game, map);
+	ft_flood_fill(r - 1, c, game, map);
+	ft_flood_fill(r, c + 1, game, map);
+	ft_flood_fill(r, c - 1, game, map);
+}
+
+int	ft_map_finish(t_game *game, char **map)
+{
+	int	valid;
 
 	valid = 0;
 	ft_flood_fill(game->player_r, game->player_c, game, map);
-	if (game->count_cpy_e == 1)
-		valid = 1;
-	map[game->exit_r][game->exit_c] = '1';
-	print_map(map);
-	ft_flood_fill2(game->player_r, game->player_c, game, map);
 	if (game->count_cpy_c == 0 && game->count_cpy_e == 1)
 		valid = 1;
 	else
@@ -87,10 +96,10 @@ int ft_map_finish(t_game *game, char **map)
 
 void	ft_check_map(t_game *game)
 {
-	char **cpy_map;
-	int	i;
+	char	**cpy_map;
+	int		i;
 
-	cpy_map = game->map;
+	cpy_map = ft_cpy_map(game);
 	i = 0;
 	if (game->map[0] == 0)
 		ft_error(game->map, "Error\nNo Map\n");
@@ -98,17 +107,18 @@ void	ft_check_map(t_game *game)
 	if ((game->rows < 3 || game->cols < 5) && ft_strlen(game->map[game->rows - 1]) )
 		ft_error(game->map, "Error\nMap is too small\n");
 	if (game->rows * 35 > 1080 || game->cols * 35 > 1920)
-		ft_error(game->map, "Error\nMap is too big\n");
+		(ft_free_map(cpy_map), ft_error(game->map, "Error\nMap is too big\n"));
 	if (ft_is_rectangle(game) == FAIL)
-		ft_error(game->map, "Error\nMap is not a rectangle\n");
+		(ft_free_map(cpy_map), ft_error(game->map, "Error\nMap is not a rectangle\n"));
 	if (ft_map_is_good(game) == FAIL)
-		ft_error(game->map, "Error\nInvalid symbol in map\n");
+		(ft_free_map(cpy_map), ft_error(game->map, "Error\nInvalid symbol in map\n"));
 	if (ft_map_closed_1(game) == FAIL)
-		ft_error(game->map, "Error\nMap not closed by 1\n");
+		(ft_free_map(cpy_map), ft_error(game->map, "Error\nMap not closed by 1\n"));
 	ft_init_count(game);
 	if (game->count_p != 1 || game->count_e != 1 || game->count_c < 1)
-		ft_error(game->map, "Error\nMap not valid\n");
+		(ft_free_map(cpy_map), ft_error(game->map, "Error\nMap not valid\n"));
 	ft_player(game);
 	if (ft_map_finish(game, cpy_map) == FAIL)
-		ft_error(game->map, "Error\nMap is not finishable\n");
+		(ft_free_map(cpy_map), ft_error(game->map, "Error\nMap is not finishable\n"));
+	ft_free_map(cpy_map);
 }

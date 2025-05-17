@@ -6,31 +6,32 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 17:36:15 by flren             #+#    #+#             */
-/*   Updated: 2025/05/16 18:13:52 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/17 05:57:01 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_map_is_good(t_game *game)
+char	**ft_cpy_map(t_game *game)
 {
-	int	r;
-	int	c;
+	int			i;
+	char		**cpy_map;
 
-	r = 0;
-	while (game->map[r])
+	i = 0;
+	cpy_map = malloc(sizeof(char *) * (game->rows + 1));
+	if (!cpy_map)
+		ft_error(game->map, "Error\nFail malloc cpy_map\n");
+	while (game->map[i])
 	{
-		c = 0;
-		while (game->map[r][c])
-		{
-			if (ft_c_is_good(game->map[r][c]) == 1)
-				return (FAIL);
-			c++;
-		}
-		r++;
+		cpy_map[i] = ft_strdup(game->map[i]);
+		if (!cpy_map[i])
+			ft_error(game->map, "Error\nFail malloc cpy_map\n");
+		i++;
 	}
-	return (SUCCESS);
+	cpy_map[i] = 0;
+	return (cpy_map);
 }
+
 int	ft_is_rectangle(t_game *game)
 {
 	int	i;
@@ -46,62 +47,60 @@ int	ft_is_rectangle(t_game *game)
 	}
 	return (SUCCESS);
 }
-int	ft_map_closed_1(t_game *game)
+
+int	ft_c_is_good(char c)
 {
-	int	r;
+	if (c == 'C' || c == 'P' || c == 'E' || c == '1' || c == '0')
+		return (SUCCESS);
+	return (FAIL);
+}
+
+void	ft_init_count(t_game *game)
+{
 	int	c;
-	
+	int	r;
+
 	r = 0;
 	while (game->map[r])
 	{
 		c = 0;
 		while (game->map[r][c])
 		{
-			if (r == 0 || r == game->rows - 1)
+			if (game->map[r][c] == 'P')
+				game->count_p += 1;
+			else if (game->map[r][c] == 'E')
 			{
-				if (game->map[r][c] != '1')
-					return (FAIL);
+				game->count_e += 1;
+				game->exit_c = c;
+				game->exit_r = r;
 			}
-			else if (c == 0 || c == game->cols - 1)
+			else if (game->map[r][c] == 'C')
+				game->count_c += 1;
+			c++;
+		}
+		r++;
+	}
+	game->count_cpy_c = game->count_c;
+}
+
+void	ft_player(t_game *game)
+{
+	int	c;
+	int	r;
+
+	r = 0;
+	while (game->map[r])
+	{
+		c = 0;
+		while (game->map[r][c])
+		{
+			if (game->map[r][c] == 'P')
 			{
-				if (game->map[r][c] != '1')
-					return (FAIL);
+				game->player_r = r;
+				game->player_c = c;
 			}
 			c++;
 		}
 		r++;
 	}
-	return (SUCCESS);
-}
-void	ft_flood_fill(int r, int c, t_game *game, char **map)
-{
-	if (r < 0 || r >= game->rows || c < 0 || c >= game->cols)
-		return ;
-	if (map[r][c] == '1' || map[r][c] == 'V' || map[r][c] == 'C')
-		return ;
-	if (map[r][c] == 'E')
-		game->count_cpy_e++;
-	if (map[r][c] != 'C')
-		map[r][c] = 'V';
-
-	ft_flood_fill(r + 1, c, game, map);
-	ft_flood_fill(r - 1, c, game, map);
-	ft_flood_fill(r, c + 1, game, map);
-	ft_flood_fill(r, c - 1, game, map);
-}
-
-void	ft_flood_fill2(int r, int c, t_game *game, char **map)
-{
-	if (r < 0 || r >= game->rows || c < 0 || c >= game->cols)
-		return ;
-	if (map[r][c] == '1' || map[r][c] == '0')
-		return ;
-	if (map[r][c] == 'C')
-		game->count_cpy_c--;
-	map[r][c] = '0';
-
-	ft_flood_fill(r + 1, c, game, map);
-	ft_flood_fill(r - 1, c, game, map);
-	ft_flood_fill(r, c + 1, game, map);
-	ft_flood_fill(r, c - 1, game, map);
 }

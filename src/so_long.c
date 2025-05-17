@@ -6,23 +6,11 @@
 /*   By: flren <flren@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 19:34:35 by flren             #+#    #+#             */
-/*   Updated: 2025/05/16 16:30:31 by flren            ###   ########.fr       */
+/*   Updated: 2025/05/17 05:40:59 by flren            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	print_map(char **map)
-{
-	int	i = 0;
-
-	while (map[i])
-	{
-		ft_putstr_fd(map[i], STDOUT_FILENO);
-		write(1, "\n", 1);
-		i++;
-	}
-}
 
 int	main(int	ac, char	**av)
 {
@@ -30,7 +18,7 @@ int	main(int	ac, char	**av)
 
 	if (ac != 2)
 		return (ft_putstr_fd("Error\nInvalid number of arguments\n", STDERR_FILENO), FAIL);
-	ft_push_map(&game, av[1]); //parsing + push dans game->map
+	ft_push_map(&game, av[1]);
 	game.mlx_ptr = mlx_init();
 	if (!game.mlx_ptr)
 		ft_error(game.map, "Error\nmlx failed to initialize\n");
@@ -42,6 +30,11 @@ int	main(int	ac, char	**av)
 		free(game.mlx_ptr);
 		ft_error(game.map, "Error\nFail to open windows\n");
 	}
-	
+	ft_init_img(&game);
+	mlx_loop_hook(game.mlx_ptr, ft_loop_game, &game);
+	mlx_hook(game.win_ptr, 17, 0, ft_mouse, &game);
+	mlx_hook(game.win_ptr, 02, (1L << 0), ft_key, &game);
+	mlx_loop(game.mlx_ptr);
+	return (0);
 }
 
